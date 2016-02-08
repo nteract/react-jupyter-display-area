@@ -11,7 +11,7 @@ export default class Display extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="cell_display">
       {
         this.props.outputs.map((output, index) => <Output output={output} key={index}/>)
       }
