@@ -32,7 +32,9 @@ export default class Output extends React.Component {
       // this is a code cell
     case 'display_data':
       const bundle = output.get('data');
-      return <RichestMime bundle={bundle} />;
+      return <RichestMime bundle={bundle}
+                          displayOrder={this.props.displayOrder}
+                          transforms={this.props.transforms} />;
     case 'stream':
       const text = output.get('text');
       switch(output.get('name')) {

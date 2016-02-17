@@ -24,7 +24,12 @@ export default class Display extends React.Component {
     return (
       <div className='cell_display'>
       {
-        this.props.outputs.map((output, index) => <Output output={output} key={index}/>)
+        this.props.outputs.map((output, index) =>
+          <Output output={output} key={index}
+                  displayOrder={this.props.displayOrder}
+                  transforms={this.props.transforms}
+          />
+        )
       }
       </div>
     );
