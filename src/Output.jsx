@@ -2,13 +2,23 @@ import React from 'react';
 
 import RichestMime from './RichestMime';
 
+import Immutable from 'immutable';
+import { transforms, displayOrder } from 'transformime-react';
+
 import ConsoleText from './ConsoleText';
 
 export default class Output extends React.Component {
   static displayName = 'Output';
 
   static propTypes = {
+    displayOrder: React.PropTypes.instanceOf(Immutable.List),
     output: React.PropTypes.any,
+    transforms: React.PropTypes.instanceOf(Immutable.Map),
+  };
+
+  static defaultProps = {
+    transforms,
+    displayOrder,
   };
 
   render() {
@@ -22,7 +32,9 @@ export default class Output extends React.Component {
       // this is a code cell
     case 'display_data':
       const bundle = output.get('data');
-      return <RichestMime bundle={bundle} />;
+      return <RichestMime bundle={bundle}
+                          displayOrder={this.props.displayOrder}
+                          transforms={this.props.transforms} />;
     case 'stream':
       const text = output.get('text');
       switch(output.get('name')) {
