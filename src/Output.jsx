@@ -49,13 +49,6 @@ export default class Output extends React.Component {
         return <ConsoleText text={`${output.get('ename')}: ${output.get('evalue')}`} />;
       }
       return <ConsoleText text={traceback.join('\n')} />;
-    case 'clear_output':
-      return (
-        <div>
-          <p style={{ color: 'red' }}>Output type '{outputType}' not implemented yet</p>
-          <pre style={{ color: 'red' }}>{JSON.stringify(output)}</pre>
-        </div>
-      );
     }
   }
 }
