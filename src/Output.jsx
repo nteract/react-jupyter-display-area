@@ -7,22 +7,8 @@ import { transforms, displayOrder } from 'transformime-react';
 
 import ConsoleText from './ConsoleText';
 
-export default class Output extends React.Component {
-  static displayName = 'Output';
-
-  static propTypes = {
-    displayOrder: React.PropTypes.instanceOf(Immutable.List),
-    output: React.PropTypes.any,
-    transforms: React.PropTypes.instanceOf(Immutable.Map),
-  };
-
-  static defaultProps = {
-    transforms,
-    displayOrder,
-  };
-
-  render() {
-    const output = this.props.output;
+export default function Output(props) {
+    const output = props.output;
     const outputType = output.get('output_type');
     switch(outputType) {
     case 'execute_result':
@@ -33,8 +19,8 @@ export default class Output extends React.Component {
     case 'display_data':
       const bundle = output.get('data');
       return <RichestMime bundle={bundle}
-                          displayOrder={this.props.displayOrder}
-                          transforms={this.props.transforms} />;
+        displayOrder={props.displayOrder}
+        transforms={props.transforms} />;
     case 'stream':
       const text = output.get('text');
       switch(output.get('name')) {
@@ -51,4 +37,14 @@ export default class Output extends React.Component {
       return <ConsoleText text={traceback.join('\n')} />;
     }
   }
-}
+
+Output.propTypes = {
+  displayOrder: React.PropTypes.instanceOf(Immutable.List),
+  output: React.PropTypes.any,
+  transforms: React.PropTypes.instanceOf(Immutable.Map),
+};
+
+Output.defaultProps = {
+  transforms,
+  displayOrder,
+};
