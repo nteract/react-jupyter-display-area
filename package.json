@@ -4,7 +4,7 @@
   "description": "Jupyter Display Area as a React Component",
   "main": "lib/index.js",
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint src/*",
     "prepublish": "npm run build",
     "prebuild": "mkdirp lib && npm run clean",
     "build": "npm run build:es5",
