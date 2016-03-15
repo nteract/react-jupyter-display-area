@@ -48,7 +48,7 @@ describe('Output', () => {
 
     const output = Immutable.fromJS({
       output_type: 'error',
-      traceback: 'whoa there buckaroo!',
+      traceback: ['whoa there buckaroo!'],
       ename: 'BuckarooException',
       evalue: 'whoa!',
     });
@@ -57,19 +57,18 @@ describe('Output', () => {
     const result = renderer.getRenderOutput();
 
     expect(result).to.deep.equal(<ConsoleText text={output.get('traceback').join('\n')} />);
-
     const outputNoTraceback = Immutable.fromJS({
       output_type: 'error',
       ename: 'BuckarooException',
       evalue: 'whoa!',
     });
 
-    renderer.render(<Output output={output} />);
+    renderer.render(<Output output={outputNoTraceback} />);
     const result2 = renderer.getRenderOutput();
 
     expect(result2).to.deep.equal(
       <ConsoleText
-        text={`${outputNoTraceback.get('ename')}: ${outputNoTraceback.get('evalue')}`}
+        text="BuckarooException: whoa!"
       />
     );
   });
