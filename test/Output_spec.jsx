@@ -16,8 +16,6 @@ import ConsoleText from '../src/ConsoleText';
 
 describe('Output', () => {
   it('handles display data', () => {
-    const renderer = createRenderer();
-
     const output = Immutable.fromJS({
       output_type: 'display_data',
       data:
@@ -26,6 +24,27 @@ describe('Output', () => {
       metadata: {},
     });
 
+    const renderer = createRenderer();
+    renderer.render(<Output output={output} />);
+    const result = renderer.getRenderOutput();
+    expect(result.props.bundle).to.eq(output.get('data'));
+  });
+  it('handles execute_result', () => {
+    const output = Immutable.fromJS({
+      data: {
+        'text/html': [
+          '<img src="https://avatars2.githubusercontent.com/u/12401040?v=3&s=200"/>',
+        ],
+        'text/plain': [
+          '<IPython.core.display.Image object>',
+        ],
+      },
+      execution_count: 7,
+      metadata: {},
+      output_type: 'execute_result',
+    });
+
+    const renderer = createRenderer();
     renderer.render(<Output output={output} />);
     const result = renderer.getRenderOutput();
     expect(result.props.bundle).to.eq(output.get('data'));
