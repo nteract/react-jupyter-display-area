@@ -5,9 +5,7 @@ import { expect } from 'chai';
 
 import Immutable from 'immutable';
 
-import {
-  renderIntoDocument,
-} from 'react-addons-test-utils';
+import TestUtils from 'react-addons-test-utils';
 
 import Output from '../src/Output.jsx';
 
@@ -44,9 +42,9 @@ describe('Output', () => {
     );
 
     outputs.forEach(output => {
-      const component = renderIntoDocument(
-        <Output output={output} />
-      );
+      const renderer = TestUtils.createRenderer();
+      renderer.render(<Output output={output} />);
+      const component = renderer.getRenderOutput();
       expect(component).to.not.be.null;
     });
   });

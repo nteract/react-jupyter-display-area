@@ -19,19 +19,18 @@ const streamStyle = {
   fontSize: '14px',
 };
 
-export default class ConsoleText extends React.Component {
-  static displayName = 'ConsoleText';
-
-  static propTypes = {
-    text: React.PropTypes.string.isRequired,
-  };
-
-  render() {
-    return <span style={streamStyle}
+export default function ConsoleText(props) {
+  return (
+    <span style={streamStyle}
       // This needs to become a pure React component, see
       // https://github.com/nteract/nteract/issues/34
       dangerouslySetInnerHTML={{ //eslint-disable-line
-        __html: console(this.props.text),
-      }}/>;
-  }
+        __html: console(props.text),
+      }}
+    />
+  );
 }
+
+ConsoleText.propTypes = {
+  text: React.PropTypes.string.isRequired,
+};
