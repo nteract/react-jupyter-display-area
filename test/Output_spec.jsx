@@ -13,6 +13,7 @@ import {
 
 import Output from '../src/Output';
 import ConsoleText from '../src/ConsoleText';
+import RichestMime from '../src/RichestMime';
 
 describe('Output', () => {
   it('handles display data', () => {
@@ -27,6 +28,7 @@ describe('Output', () => {
     const renderer = createRenderer();
     renderer.render(<Output output={output} />);
     const result = renderer.getRenderOutput();
+    expect(result.type).to.eq(RichestMime);
     expect(result.props.bundle).to.eq(output.get('data'));
   });
   it('handles execute_result', () => {
@@ -47,6 +49,7 @@ describe('Output', () => {
     const renderer = createRenderer();
     renderer.render(<Output output={output} />);
     const result = renderer.getRenderOutput();
+    expect(result.type).to.eq(RichestMime);
     expect(result.props.bundle).to.eq(output.get('data'));
   });
   it('handles stream data', () => {
