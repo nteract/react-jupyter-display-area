@@ -1,51 +1,46 @@
-/* eslint camelcase: 0 */
 import React from 'react';
 
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
+import jsxChai from 'jsx-chai';
+
+chai.use(jsxChai);
 
 import Immutable from 'immutable';
 
-import TestUtils from 'react-addons-test-utils';
+import {
+  createRenderer,
+} from 'react-addons-test-utils';
 
-import Output from '../src/Output.jsx';
+import Output from '../src/Output';
+import ConsoleText from '../src/ConsoleText';
 
-// Boilerplate test to make sure the testing setup is configured
 describe('Output', () => {
-  it('accepts an Immutable.Map of output data', () => {
-    const outputs = Immutable.fromJS(
-      [{ data:
-           { 'text/html': '<h1>Multiple</h1>',
-             'text/plain': '<IPython.core.display.HTML object>' },
-          metadata: {},
-          output_type: 'display_data' },
-        { data:
-           { 'text/html': '<p>Display Elements</p>',
-             'text/plain': '<IPython.core.display.HTML object>' },
-          metadata: {},
-          output_type: 'display_data' },
-        { data:
-           { 'text/markdown': '**awesome**',
-             'text/plain': '<IPython.core.display.Markdown object>' },
-          metadata: {},
-          output_type: 'display_data' },
-        { name: 'stdout', output_type: 'stream', text: 'hey\n' },
-        { data: { 'text/plain': '42' },
-          execution_count: 11,
-          metadata: {},
-          output_type: 'execute_result' },
-        { data:
-           { 'text/html': '<img src="https://avatars2.githubusercontent.com/u/12401040?v=3&s=200"/>',
-             'text/plain': '<IPython.core.display.Image object>' },
-          execution_count: 7,
-          metadata: {},
-          output_type: 'execute_result' }]
-    );
+  it('handles display data', () => {
+    const renderer = createRenderer();
 
-    outputs.forEach(output => {
-      const renderer = TestUtils.createRenderer();
-      renderer.render(<Output output={output} />);
-      const component = renderer.getRenderOutput();
-      expect(component).to.not.be.null;
+    const output = Immutable.fromJS({
+      data:
+          { 'text/html': '<h1>Multiple</h1>',
+            'text/plain': '<IPython.core.display.HTML object>' },
+      metadata: {},
+      output_type: 'display_data',
     });
+
+    renderer.render(<Output output={output} />);
+    const result = renderer.getRenderOutput();
+    expect(result.props.bundle).to.eq(output.get('data'));
+  });
+  it('handles stream data', () => {
+    const renderer = createRenderer();
+
+    const output = Immutable.fromJS({
+      name: 'stdout',
+      output_type: 'stream',
+      text: 'hey\n',
+    });
+
+    renderer.render(<Output output={output} />);
+    const result = renderer.getRenderOutput();
+    expect(result).to.deep.equal(<ConsoleText text={'hey\n'} />);
   });
 });
