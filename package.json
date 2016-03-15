@@ -38,6 +38,10 @@
       "transform-class-properties"
     ]
   },
+  "peerDependencies": {
+    "react": "0.14.x",
+    "react-dom": "0.14.x"
+  },
   "devDependencies": {
     "babel-cli": "^6.4.0",
     "babel-core": "^6.4.0",
