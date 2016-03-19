@@ -12,8 +12,9 @@ import {
 } from 'react-addons-test-utils';
 
 import Output from '../src/Output';
-import ConsoleText from '../src/ConsoleText';
 import RichestMime from '../src/RichestMime';
+
+const Ansi = require('ansi-to-react');
 
 describe('Output', () => {
   it('handles display data', () => {
@@ -58,12 +59,12 @@ describe('Output', () => {
     const output = Immutable.fromJS({
       output_type: 'stream',
       name: 'stdout',
-      text: 'hey\n',
+      text: 'hey',
     });
 
     renderer.render(<Output output={output} />);
     const result = renderer.getRenderOutput();
-    expect(result).to.deep.equal(<ConsoleText text={'hey\n'} />);
+    expect(result).to.deep.equal(<Ansi>hey</Ansi>);
   });
   it('handles errors/tracebacks', () => {
     const renderer = createRenderer();
@@ -78,7 +79,7 @@ describe('Output', () => {
     renderer.render(<Output output={output} />);
     const result = renderer.getRenderOutput();
 
-    expect(result).to.deep.equal(<ConsoleText text={output.get('traceback').join('\n')} />);
+    expect(result).to.deep.equal(<Ansi>{output.get('traceback').join('\n')}</Ansi>);
     const outputNoTraceback = Immutable.fromJS({
       output_type: 'error',
       ename: 'BuckarooException',
@@ -89,9 +90,7 @@ describe('Output', () => {
     const result2 = renderer.getRenderOutput();
 
     expect(result2).to.deep.equal(
-      <ConsoleText
-        text="BuckarooException: whoa!"
-      />
+      <Ansi>BuckarooException: whoa!</Ansi>
     );
   });
 });

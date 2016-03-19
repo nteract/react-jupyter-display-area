@@ -69,6 +69,7 @@
   },
   "dependencies": {
     "ansi-to-html": "^0.3.0",
+    "ansi-to-react": "0.0.1",
     "transformime-react": "^0.3.0"
   }
 }

@@ -5,7 +5,7 @@ import RichestMime from './RichestMime';
 import Immutable from 'immutable';
 import { transforms, displayOrder } from 'transformime-react';
 
-import ConsoleText from './ConsoleText';
+const Ansi = require('ansi-to-react');
 
 export default function Output(props) {
   const output = props.output;
@@ -29,9 +29,8 @@ export default function Output(props) {
       const text = output.get('text');
       switch (output.get('name')) {
         case 'stdout':
-          return <ConsoleText text={text} />;
         case 'stderr':
-          return <ConsoleText text={text} />;
+          return <Ansi>{text}</Ansi>;
         default:
           return null;
       }
@@ -39,9 +38,9 @@ export default function Output(props) {
     case 'error': {
       const traceback = output.get('traceback');
       if (!traceback) {
-        return <ConsoleText text={`${output.get('ename')}: ${output.get('evalue')}`} />;
+        return <Ansi>{`${output.get('ename')}: ${output.get('evalue')}`}</Ansi>;
       }
-      return <ConsoleText text={traceback.join('\n')} />;
+      return <Ansi>{traceback.join('\n')}</Ansi>;
     }
     default:
       return null;
