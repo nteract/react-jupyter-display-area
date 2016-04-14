@@ -9,6 +9,7 @@
     "prebuild": "mkdirp lib && npm run clean",
     "build": "npm run build:es5",
     "build:es5": "babel src --out-dir lib/ --source-maps",
+    "build:watch": "babel src --watch --out-dir lib/ --source-maps",
     "test": "electron-mocha --renderer --compilers js:babel-core/register 'test/**/*.@(js|jsx)'",
     "test:watch": "npm run test -- --watch",
     "clean": "rimraf lib/*"
