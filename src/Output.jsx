@@ -18,12 +18,25 @@ export default function Output(props) {
       // this is a code cell
     case 'display_data': {
       const bundle = output.get('data');
+     
+      const mimes = bundle.keySeq()
+    
       return (
+        <div>
+
+        {(()=>{return mimes.length > 1?(<select>
+            <option>auto</option>
+            {mimes.map((mime,index) => {
+                    return <option>{mime}</option>
+                })
+            }
+        </select>):null})()}
         <RichestMime
           bundle={bundle}
           displayOrder={props.displayOrder}
           transforms={props.transforms}
-        />);
+        />
+        </div>);
     }
     case 'stream': {
       const text = output.get('text');

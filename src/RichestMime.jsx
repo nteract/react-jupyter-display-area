@@ -9,7 +9,6 @@ export default function RichestMime(props) {
     props.displayOrder,
     props.transforms
   );
-
   const Transform = props.transforms.get(mimetype);
   const data = props.bundle.get(mimetype);
   return <Transform key={mimetype} data={data} />;

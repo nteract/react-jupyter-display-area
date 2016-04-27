@@ -6,9 +6,10 @@ import { transforms, displayOrder } from 'transformime-react';
 
 import Output from './Output';
 
+
 export default function Display(props) {
   return (
-    <div className="cell_display">
+    <div className="cell_display woo">
       {
         props.outputs.map((output, index) =>
           <Output output={output} key={index}
