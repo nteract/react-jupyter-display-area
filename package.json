@@ -1,6 +1,6 @@
 {
   "name": "react-jupyter-display-area",
-  "version": "0.4.2",
+  "version": "1.0.0",
   "description": "Jupyter Display Area as a React Component",
   "main": "lib/index.js",
   "scripts": {
