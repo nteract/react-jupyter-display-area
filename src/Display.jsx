@@ -7,16 +7,8 @@ import { transforms, displayOrder } from 'transformime-react';
 import Output from './Output';
 
 export default function Display(props) {
-  var hiddenStyle = {
-    display: 'none',
-  };
-
-  var visibleStyle = {
-    display: 'block',
-  };
-
   return (
-    <div className="cell_display" style={this.props.isHidden ? hiddenStyle : visibleStyle}>
+    <div className="cell_display">
       {
         props.outputs.map((output, index) =>
           <Output output={output} key={index}
@@ -32,7 +24,6 @@ export default function Display(props) {
 Display.propTypes = {
   displayOrder: React.PropTypes.instanceOf(Immutable.List),
   outputs: React.PropTypes.instanceOf(Immutable.List),
-  isHidden: React.PropTypes.bool,
   transforms: React.PropTypes.instanceOf(Immutable.Map),
 };
 

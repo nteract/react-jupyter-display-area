@@ -9,21 +9,21 @@ import Immutable from 'immutable';
 
 import {
   createRenderer
-} from 'react-addon-test-utils';
+} from 'react-addons-test-utils';
 
-import Display from '../src/Display';
+import ToggleableDisplay from '../src/ToggleableDisplay';
 
-describe('Display', () => {
+describe('ToggleableDisplay', () => {
   it('does not display when status is hidden', () => {
     const renderer = createRenderer();
-    renderer.render(<Display isHidden={true} />);
+    renderer.render(<ToggleableDisplay isHidden={true} />);
     const component = renderer.getRenderOutput();
-    expect(component.style.display).to.equal('none');
+    expect(component.props.style.display).to.equal('none');
   });
   it('displays status when it is not hidden', () => {
     const renderer = createRenderer();
-    renderer.render(<Display isHidden={false} />);
+    renderer.render(<ToggleableDisplay isHidden={false} />);
     const component = renderer.getRenderOutput();
-    expect(component.style.display).to.equal('none');
+    expect(component.props.style.display).to.equal('block');
   });
 });
