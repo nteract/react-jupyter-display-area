@@ -8,7 +8,7 @@ import Display from './Display';
 export default function ToggleableDisplay(props) {
   const style = { display: props.isHidden ? 'none' : 'block' };
   return (
-    <Display props={props} style={style}/>
+    <Display {...props} style={style}/>
   );
 }
 
