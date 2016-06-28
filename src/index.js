@@ -1,2 +1,4 @@
 import Display from './Display';
-export default Display;
+import ToggleableDisplay from './ToggleableDisplay';
+
+export { Display, ToggleableDisplay };
