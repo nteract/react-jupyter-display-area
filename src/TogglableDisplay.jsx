@@ -6,10 +6,13 @@ import { transforms, displayOrder } from 'transformime-react';
 import Display from './Display';
 
 export default function TogglableDisplay(props) {
-  const style = { display: props.isHidden ? 'none' : 'block' };
-  return (
-    <Display {...props} style={style}/>
-  );
+  if (!props.isHidden) {
+    return (
+      <Display {...props}/>
+    );
+  } else {
+    return null;
+  }
 }
 
 TogglableDisplay.propTypes = {
