@@ -10,6 +10,11 @@ export default function RichestMime(props) {
     props.transforms
   );
 
+  if (!mimetype) {
+    // If no mimetype is supported, don't return a component
+    return null;
+  }
+
   const Transform = props.transforms.get(mimetype);
   const data = props.bundle.get(mimetype);
   return <Transform key={mimetype} data={data} />;

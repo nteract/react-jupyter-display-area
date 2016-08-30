@@ -10,9 +10,8 @@ export default function TogglableDisplay(props) {
     return (
       <Display {...props}/>
     );
-  } else {
-    return null;
   }
+  return null;
 }
 
 TogglableDisplay.propTypes = {
