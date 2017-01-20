@@ -1,5 +1,7 @@
 # react-jupyter-display-area
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/nteract/react-jupyter-display-area.svg)](https://greenkeeper.io/)
+
 Render Jupyter notebook outputs in a trim little React component.
 
 ```jsx
