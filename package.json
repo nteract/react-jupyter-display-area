@@ -71,7 +71,7 @@
     "rimraf": "^2.5.0"
   },
   "dependencies": {
-    "ansi-to-react": "1.1.1",
+    "ansi-to-react": "1.2.0",
     "transformime-react": "^1.1.0"
   }
 }
